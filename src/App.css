@@ -1,0 +1,164 @@
+.App {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f4f6f8;
+  min-height: 100vh;
+}
+
+/* Title top-left and smaller */
+.title {
+  text-align: left;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Flex row for Ready Queue, CPU, Completed */
+.row-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* responsive */
+}
+
+.section {
+  flex: 1;
+  min-width: 220px;
+  margin: 10px 0;
+}
+
+/* Queue and CPU styling */
+.queue,
+.cpu {
+  display: flex;
+  flex-direction: column; /* vertical stacking of processes */
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 80px;
+  border: 2px dashed #bbb;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Process styling */
+.process {
+  background: #4cafef;
+  color: white;
+  font-weight: bold;
+  padding: 12px 18px;
+  margin: 5px 0;
+  border-radius: 8px;
+  transition: all 0.5s ease;
+}
+
+.process.active {
+  background: #ff9800;
+  transform: scale(1.2);
+}
+
+.process.done {
+  background: #4caf50;
+}
+
+/* Start Button above CPU */
+.start-btn {
+  background: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 10px; /* spacing */
+  transition: background 0.3s ease;
+}
+
+.start-btn:hover {
+  background: #3700b3;
+}
+
+.start-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* Gantt chart styling */
+.gantt {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.gantt-block {
+  background: #2196f3;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 6px;
+  min-width: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.gantt-block .time {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #eee;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: #6200ea;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background: #f4f6f8;
+}
+
+/* CPU section flex centering */
+.section .cpu,
+.section .start-btn {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;
+}
+
+/* CPU section centering */
+.section.cpu-section {
+  display: flex;
+  flex-direction: column; /* stack button above CPU */
+  justify-content: center; /* vertical centering if needed */
+  align-items: center;     /* horizontal centering */
+}
+
+/* Keep CPU box original size */
+.cpu {
+  width: 100%;           /* full width of section */
+  min-height: 80px;      /* original height */
+  border: 2px dashed #bbb;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center; /* center the active process inside CPU */
+  align-items: center;
+}
