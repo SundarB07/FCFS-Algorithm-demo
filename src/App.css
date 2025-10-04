@@ -1,16 +1,29 @@
+/* Main App container with neon gradient background */
 .App {
   font-family: Arial, sans-serif;
-  padding: 20px;
-  background: #f4f6f8;
+  padding: 80px 20px 20px 20px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  scroll-behavior: smooth;
+  transition: background 0.5s ease;
 }
 
-/* Title top-left and smaller */
+/* Full-width top header bar */
 .title {
-  text-align: left;
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: 22px;
+  color: #fff;
+  margin: 0;
+  padding: 18px 20px;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  width: 100vw;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  text-shadow: 1px 1px 4px #000;
+  transition: background 0.5s ease;
 }
 
 /* Flex row for Ready Queue, CPU, Completed */
@@ -18,69 +31,155 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap; /* responsive */
+  flex-wrap: wrap;
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
 }
 
+/* Fade-in animation for row-section */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section styling */
 .section {
   flex: 1;
   min-width: 220px;
   margin: 10px 0;
 }
 
-/* Queue and CPU styling */
+/* Section headings with neon gradient backgrounds */
+.section h2 {
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: inline-block;
+  text-shadow: 1px 1px 6px #000;
+}
+
+/* Headings gradient colors */
+.section h2:nth-of-type(1) {
+  background: linear-gradient(90deg, #ff6ec7, #ff4b2b);
+}
+.section h2:nth-of-type(2) {
+  background: linear-gradient(90deg, #faff00, #ffcc00);
+  color: #000;
+}
+.section h2:nth-of-type(3) {
+  background: linear-gradient(90deg, #00ff99, #00cc99);
+  color: #000;
+}
+.section h2:nth-of-type(4) {
+  background: linear-gradient(90deg, #ff00ff, #cc33ff);
+}
+.section h2:nth-of-type(5) {
+  background: linear-gradient(90deg, #00ffff, #33ccff);
+  color: #000;
+}
+
+/* Queue and CPU box styling */
 .queue,
 .cpu {
   display: flex;
-  flex-direction: column; /* vertical stacking of processes */
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-height: 80px;
-  border: 2px dashed #bbb;
-  background: #fff;
+  border: 2px dashed #fff;
+  background: rgba(0, 0, 0, 0.4);
   padding: 10px;
   border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Process styling */
+/* Smooth transition for CPU process */
+.cpu .process {
+  transition: transform 0.6s ease, opacity 0.6s ease, background 0.5s ease;
+  position: absolute;
+}
+
+/* Process design */
 .process {
-  background: #4cafef;
-  color: white;
+  background: linear-gradient(135deg, #ff6ec7, #ff4b2b);
+  color: #fff;
   font-weight: bold;
   padding: 12px 18px;
   margin: 5px 0;
-  border-radius: 8px;
-  transition: all 0.5s ease;
+  border-radius: 10px;
+  transition: all 0.6s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  animation: fadeIn 0.6s forwards;
+}
+
+/* Fade in animation for processes */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .process.active {
-  background: #ff9800;
+  background: linear-gradient(135deg, #00ff99, #00cc66);
   transform: scale(1.2);
+  box-shadow: 0 0 25px #00ff99;
 }
 
 .process.done {
-  background: #4caf50;
+  background: linear-gradient(135deg, #00ffff, #00ccff);
+  box-shadow: 0 0 15px #00ffff;
+  animation: moveToCompleted 0.6s forwards;
 }
 
-/* Start Button above CPU */
+/* Move to completed animation */
+@keyframes moveToCompleted {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.process:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #fff;
+}
+
+/* Start Button centered & glowing */
 .start-btn {
-  background: #6200ea;
-  color: white;
+  display: block;
+  margin: 20px auto;
+  background: linear-gradient(90deg, #42a5f5, #ab47bc);
+  color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
   cursor: pointer;
-  margin-bottom: 10px; /* spacing */
-  transition: background 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(171, 71, 188, 0.6);
+  transition: all 0.3s ease;
 }
 
 .start-btn:hover {
-  background: #3700b3;
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(171, 71, 188, 0.9);
 }
 
 .start-btn:disabled {
-  background: #999;
+  background: #555;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* Gantt chart styling */
@@ -90,23 +189,46 @@
   align-items: flex-end;
   margin-top: 10px;
   flex-wrap: wrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ab47bc #222;
+}
+
+.gantt::-webkit-scrollbar {
+  height: 6px;
+}
+.gantt::-webkit-scrollbar-thumb {
+  background: #ab47bc;
+  border-radius: 3px;
 }
 
 .gantt-block {
-  background: #2196f3;
-  color: white;
+  background: linear-gradient(135deg, #ff6ec7, #ff4b2b);
+  color: #fff;
   padding: 10px;
   margin: 5px;
-  border-radius: 6px;
+  border-radius: 10px;
   min-width: 80px;
   text-align: center;
   font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.gantt-block:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #fff;
 }
 
 .gantt-block .time {
   font-size: 12px;
   margin-top: 5px;
-  color: #eee;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 4px;
+  border-radius: 3px;
 }
 
 /* Table styling */
@@ -114,51 +236,230 @@ table {
   width: 100%;
   margin-top: 10px;
   border-collapse: collapse;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   overflow: hidden;
+  color: #fff;
 }
 
-th, td {
-  border: 1px solid #ccc;
+th,
+td {
+  border: 1px solid #fff;
   padding: 10px;
   text-align: center;
 }
 
 th {
-  background: #6200ea;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
   color: #fff;
+  text-shadow: 1px 1px 4px #000;
+}
+
+td {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 tr:nth-child(even) {
-  background: #f4f6f8;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-/* CPU section flex centering */
-.section .cpu,
-.section .start-btn {
+/* Input section */
+.input-section {
   display: flex;
-  justify-content: center; /* centers horizontally */
+  justify-content: center;
   align-items: center;
+  gap: 15px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(98, 0, 234, 0.3);
+  backdrop-filter: blur(6px);
+  width: fit-content;
 }
 
-/* CPU section centering */
-.section.cpu-section {
+.input-section label {
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.input-section input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  width: 80px;
+  transition: all 0.3s ease;
+}
+
+.input-section input:focus {
+  border-color: #ab47bc;
+  box-shadow: 0 0 8px #ab47bc;
+}
+
+.input-section button {
+  background: linear-gradient(90deg, #42a5f5, #ab47bc);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-section button:hover {
+  background: linear-gradient(90deg, #2196f3, #9c27b0);
+  transform: scale(1.05);
+}
+
+/* Process input rows */
+.process-inputs {
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 12px;
+  width: 60%;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 10px rgba(66, 165, 245, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.process-input-row {
   display: flex;
-  flex-direction: column; /* stack button above CPU */
-  justify-content: center; /* vertical centering if needed */
-  align-items: center;     /* horizontal centering */
-}
-
-/* Keep CPU box original size */
-.cpu {
-  width: 100%;           /* full width of section */
-  min-height: 80px;      /* original height */
-  border: 2px dashed #bbb;
-  background: #fff;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
   padding: 10px;
+  margin: 10px 0;
   border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.process-input-row:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.process-input-row span {
+  color: white;
+  font-weight: 600;
+  width: 50px;
+  text-align: center;
+}
+
+.process-input-row input {
+  width: 100px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.process-input-row input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 8px #42a5f5;
+}
+
+/* Header for input list */
+.process-input-header {
   display: flex;
-  justify-content: center; /* center the active process inside CPU */
+  justify-content: space-around;
   align-items: center;
+  background: linear-gradient(90deg, #42a5f5, #ab47bc);
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(171, 71, 188, 0.5);
+}
+
+.process-input-header span {
+  width: 100px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in with smooth timing */
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Optional: smoother CPU active transition */
+.process.active {
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+}
+
+/* Optional: completed process smoother */
+.process.done {
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+}
+
+/* Optional: Gantt block smooth appearance */
+.gantt-block {
+  transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
+}
+
+/* Tooltip wrapper */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  color: #fff;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  max-width: 220px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%; /* position above the element */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+  box-shadow: 0 0 8px #42a5f5, 0 0 12px #ab47bc;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* at the bottom of tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  bottom: 135%;
 }
